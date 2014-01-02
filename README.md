@@ -1,6 +1,10 @@
 # Geomodel
 
-[![Build Status](https://secure.travis-ci.org/integrallis/stripe_event.png?branch=master)](http://travis-ci.org/integrallis/geomodel) [![Dependency Status](https://gemnasium.com/integrallis/geomodel.png)](https://gemnasium.com/integrallis/geomodel) [![Gem Version](https://badge.fury.io/rb/geomodel.png)](http://badge.fury.io/rb/geomodel) [![Code Climate](https://codeclimate.com/github/integrallis/geomodel.png)](https://codeclimate.com/github/integrallis/geomodel)
+[![Build Status](https://secure.travis-ci.org/integrallis/geomodel.png?branch=master)](http://travis-ci.org/integrallis/geomodel) 
+[![Gem Version](https://badge.fury.io/rb/geomodel.png)](http://badge.fury.io/rb/geomodel)
+[![Dependency Status](https://gemnasium.com/integrallis/geomodel.png)](https://gemnasium.com/integrallis/geomodel) 
+[![Code Climate](https://codeclimate.com/github/integrallis/geomodel.png)](https://codeclimate.com/github/integrallis/geomodel)
+[![Coverage Status](https://coveralls.io/repos/integrallis/geomodel/badge.png?branch=master)](https://coveralls.io/r/integrallis/geomodel?branch=master)
 
 Geomodel aims to provide a generalized solution for performing basic indexing 
 and querying of geospatial data in non-relation environments. At the core, this 
