@@ -68,10 +68,13 @@ indexed and filtered by either conformance to a bounding box or by proximity
 # Approach
 
 This Ruby implementation of GeoModel is based on the Python, Java and JavaScript implementations. 
-It's implemented as class level methods contained modules and a few datatype classes. So the 'model' 
-part isn't quite there and I don't really see a need for it. Since the library is meant to be use in 
-Non-Relational/Non-ORM environmets, binding the functions/methods to a model does not make much sense. 
+It's implemented as class level methods contained within modules and a few datatype classes. So the 
+'model' part isn't quite there and I don't really see a need for it. Since the library is meant to 
+be use in Non-Relational/Non-ORM environmets, binding the functions/methods to a model does not make
+much sense. 
+
 The model part was mostly implemented in the other libraries to bind directly to Google App Engine.
+The idea here is to make it backend/db independent and use callbacks to integrate with the backend.
 
 # References
 
