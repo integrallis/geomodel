@@ -130,19 +130,19 @@ flw_spire.location = Geomodel::Types::Point.new(33.633406, -111.916803)
 flw_spire.geocells = Geomodel::GeoCell.generate_geocells(flw_spire.location)
 
 puts flw_spire.geocells
-8
-8d
-8da
-8daa
-8daab
-8daab6
-8daab66
-8daab666
-8daab6668
-8daab66684
-8daab66684e
-8daab66684e4
-8daab66684e4d
+# 8
+# 8d
+# 8da
+# 8daa
+# 8daab
+# 8daab6
+# 8daab66
+# 8daab666
+# 8daab6668
+# 8daab66684
+# 8daab66684e
+# 8daab66684e4
+# 8daab66684e4d
 ```
 
 ### Bounding Box Queries
