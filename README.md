@@ -103,7 +103,7 @@ Or install it yourself as:
 Currently, only single-point entities and two types of basic geospatial queries
 on those entities are supported.
 
-### Representing your locations
+### Representing your Locations
 
 You'll need a class to hold a geolocation. It assumes that an "entity" has a unique 
 "id" (specific field can be configure), a latitude/longitude combination stored in 
@@ -128,6 +128,21 @@ flw_spire = Entity.new
 flw_spire.id = 'Flatiron'
 flw_spire.location = Geomodel::Types::Point.new(33.633406, -111.916803)
 flw_spire.geocells = Geomodel::GeoCell.generate_geocells(flw_spire.location)
+
+puts flw_spire.geocells
+8
+8d
+8da
+8daa
+8daab
+8daab6
+8daab66
+8daab666
+8daab6668
+8daab66684
+8daab66684e
+8daab66684e4
+8daab66684e4d
 ```
 
 ### Bounding Box Queries
@@ -150,7 +165,7 @@ result_set = my_db.query('SELECT * WHERE location_geocells IN (?)', query_geocel
 matches = Geomodel.filter_result_set_by_bounding_box(bounding_box, result_set)
 ```
 
-### proximity (nearest-n) queries
+### Proximity (nearest-n) Queries
 
 Find nearby locations given a location (lat & lon) and a radius in meters:
 
