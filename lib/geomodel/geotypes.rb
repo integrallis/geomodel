@@ -8,7 +8,7 @@ module Geomodel::Types
   # 
   class Point
     
-    attr_reader :latitude, :longitude
+    attr_accessor :latitude, :longitude
     
     alias_method :lat, :latitude
     alias_method :lon, :longitude

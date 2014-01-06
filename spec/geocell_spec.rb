@@ -58,6 +58,26 @@ describe 'Geomodel::GeoCell' do
     expect(all_adjacents.size).to eq(8)
   end
   
+  it "can determine adjacency left and bottom of parent cell" do
+    cells = {
+            "8e6187fe6187fa" => ["8e6187fe618d45", "8e6187fe618d50", "8e6187fe618d51", "8e6187fe6187fb", "8e6187fe6187f9", "8e6187fe6187f8", "8e6187fe6187ed", "8e6187fe6187ef"],
+            "8e6187fe618d45" => ["8e6187fe618d46", "8e6187fe618d47", "8e6187fe618d52", "8e6187fe618d50", "8e6187fe6187fa", "8e6187fe6187ef", "8e6187fe6187ee", "8e6187fe618d44"]
+            }
+    cells.each do |cell, adjacents|
+      expect(Geomodel::GeoCell.all_adjacents(cell)).to eq(adjacents)
+    end
+  end
+  
+  it "cam calculate the immediate children of a given geocell" do
+    expect(Geomodel::GeoCell.children("8e6187fe6187f")).
+    to eq(
+    %w(8e6187fe6187f0 8e6187fe6187f1 8e6187fe6187f2 8e6187fe6187f3 
+      8e6187fe6187f4 8e6187fe6187f5 8e6187fe6187f6 8e6187fe6187f7 
+      8e6187fe6187f8 8e6187fe6187f9 8e6187fe6187fa 8e6187fe6187fb 
+      8e6187fe6187fc 8e6187fe6187fd 8e6187fe6187fe 8e6187fe6187ff)
+    )
+  end
+  
   it "can determine collinearity" do
     cell = Geomodel::GeoCell.compute(Geomodel::Types::Point.new(37, -122), 14)
     
@@ -107,6 +127,30 @@ describe 'Geomodel::GeoCell' do
     
     expect(geocells.size).to be(1)
     expect(geocells).to include("9aa228a8b3b00")
+  end
+  
+  it "can calculate that the shortest distance between a point and a geocell bounding boxfor the point is effectively zero" do
+    point = Geomodel::Types::Point.new(40.7407092, -73.9894039)
+    cell = "9ac7be064ea77"
+    expect(Geomodel::GeoCell.point_distance(cell, point)).to be_within(0.2).of(0.0)
+  end
+  
+  it "can calculate the shortest distance between a point outside a geocell and the geocell" do
+    point = Geomodel::Types::Point.new(40.7425610, -73.9922670)
+    cell = "9ac7be064ea77"
+    expect(Geomodel::GeoCell.point_distance(cell, point)).to be_within(0.2).of(317.2)
+  end
+  
+  it "can calculate the shortest distance between a point between north and south (but not between east and west) of a geocell bounding box" do
+    point = Geomodel::Types::Point.new(40.740710, -74.025537)
+    cell = "9ac7be064ea77"
+    expect(Geomodel::GeoCell.point_distance(cell, point)).to be_within(0.2).of(3047.3)
+  end
+  
+  it "can calculate the shortest distance between a point between east and west (but not between north and south) of a geocell bounding box" do
+    point = Geomodel::Types::Point.new(40.740720, -73.989403)
+    cell = "9ac7be064ea77"
+    expect(Geomodel::GeoCell.point_distance(cell, point)).to be_within(0.2).of(0.99)
   end
   
   # TODO implement these tests!

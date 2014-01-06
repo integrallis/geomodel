@@ -54,11 +54,38 @@ describe 'Geomodel::Types' do
       expect(box_a).to eq(box_b)
     end
     
-    it "can be created with north below south" do
+    it "can't be created with north below south" do
       box = Geomodel::Types::Box.new(37, -122, 34, -125)
       
       expect { box.north = 32 }.to raise_error
       expect { box.south = 39 }.to raise_error
+    end
+    
+    it "can be created with south below north" do
+      box = Geomodel::Types::Box.new(37, -122, 34, -125)
+      
+      expect { box.north = 39 }.to_not raise_error
+      expect { box.south = 32 }.to_not raise_error
+    end
+    
+    it "can be set the values for north, east, south and west" do
+      box = Geomodel::Types::Box.new(37, -122, 34, -125)
+      
+      expect { box.north = 39 }.to_not raise_error
+      expect { box.south = 32 }.to_not raise_error
+      expect { box.east = -123 }.to_not raise_error
+      expect { box.west = -126 }.to_not raise_error
+      
+      expect(box.north).to eq(39)
+      expect(box.south).to eq(32)
+      expect(box.east).to eq(-123)
+      expect(box.west).to eq(-126)
+    end
+    
+    it "returns a suitable string representation" do
+      box = Geomodel::Types::Box.new(37, -122, 34, -125)
+      
+      expect(box.to_s).to eq('(37, -122, 34, -125)')
     end
 
   end

@@ -267,7 +267,7 @@ module Geomodel
       cell_adj_arr = cell.split(//)  # Split the geocell string characters into a list.
       i = cell_adj_arr.size - 1
 
-      while i >= 0 && (dx != 0 or dy != 0)
+      while i >= 0 && (dx != 0 || dy != 0)
         x, y = subdiv_xy(cell_adj_arr[i])
 
         # Horizontal adjacency.
@@ -339,24 +339,25 @@ module Geomodel
       if between_w_e
         if between_n_s
           # Inside the geocell.
-          return [Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(bbox.south, point.lon)),
-                  Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(bbox.north, point.lon)),
-                  Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(point.lat, bbox.east)),
-                  Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(point.lat, bbox.west))].min
+          
+          return [Geomodel::Math.distance(point, Geomodel::Types::Point.new(bbox.south, point.lon)),
+                  Geomodel::Math.distance(point, Geomodel::Types::Point.new(bbox.north, point.lon)),
+                  Geomodel::Math.distance(point, Geomodel::Types::Point.new(point.lat, bbox.east)),
+                  Geomodel::Math.distance(point, Geomodel::Types::Point.new(point.lat, bbox.west))].min
         else
-          return [Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(bbox.south, point.lon)),
-                  Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(bbox.north, point.lon))].min
+          return [Geomodel::Math.distance(point, Geomodel::Types::Point.new(bbox.south, point.lon)),
+                  Geomodel::Math.distance(point, Geomodel::Types::Point.new(bbox.north, point.lon))].min
         end
       else
         if between_n_s
-          return [Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(point.lat, bbox.east)),
-                  Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(point.lat, bbox.west))]
+          return [Geomodel::Math.distance(point, Geomodel::Types::Point.new(point.lat, bbox.east)),
+                  Geomodel::Math.distance(point, Geomodel::Types::Point.new(point.lat, bbox.west))].min
         else
           # TODO(romannurik): optimize
-          return [Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(bbox.south, bbox.east)),
-                  Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(bbox.north, bbox.east)),
-                  Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(bbox.south, bbox.west)),
-                  Geocoder::GeoMath.distance(point, Geomodel::Types::Point.new(bbox.north, bbox.west))]
+          return [Geomodel::Math.distance(point, Geomodel::Types::Point.new(bbox.south, bbox.east)),
+                  Geomodel::Math.distance(point, Geomodel::Types::Point.new(bbox.north, bbox.east)),
+                  Geomodel::Math.distance(point, Geomodel::Types::Point.new(bbox.south, bbox.west)),
+                  Geomodel::Math.distance(point, Geomodel::Types::Point.new(bbox.north, bbox.west))].min
         end
       end
     end
@@ -444,7 +445,7 @@ module Geomodel
     # For example, the immediate children of 'a' are 'a0', 'a1', ..., 'af'.
     # 
     def self.children(cell)
-      GEOCELL_ALPHABET.map { |chr| cell + chr }
+      GEOCELL_ALPHABET.split(//).map { |chr| cell + chr }
     end
 
     # Returns the (x, y) of the geocell character in the 4x4 alphabet grid.
