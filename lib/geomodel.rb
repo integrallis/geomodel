@@ -74,7 +74,7 @@ module Geomodel
       (!x.empty? && !y.empty?) ? x[1] <=> y[1] : 0
     end
     
-    dup_fn = lambda do |x| 
+    dup_fn = lambda do |x|
       (x.nil? || x.empty?) ? nil : x[0].id 
     end # assuming the the element responds to #id
   
@@ -87,21 +87,21 @@ module Geomodel
       break if max_distance && closest_possible_next_result_dist > max_distance
   
       cur_geocells_unique = cur_geocells - searched_cells.to_a
-  
+        
       # Run query on the next set of geocells.
       cur_resolution = cur_geocells[0].size
-
+      
       # Update results and sort.
       new_results = query_runner.call(cur_geocells_unique)
-  
+      
       searched_cells.merge(cur_geocells)
-  
+      
       # Begin storing distance from the search result entity to the
       # search center along with the search result itself, in a tuple.
       new_results = new_results.map { |entity|  [entity, Geomodel::Math.distance(center, entity.location)] }
       new_results.sort! { |x, y| (!x.empty? && !y.empty?) ? x[1] <=> y[1] : 0 }
       new_results = new_results[0...max_results]
-  
+      
       # Merge new_results into results or the other way around, depending on
       # which is larger.
       if results.size > new_results.size
@@ -112,7 +112,7 @@ module Geomodel
       end
 
       results = results[0...max_results]
-  
+      
       sorted_edges, sorted_edge_distances = Geomodel::Util.distance_sorted_edges(cur_geocells, center)
   
       if results.empty? || cur_geocells.size == 4
@@ -121,7 +121,7 @@ module Geomodel
         # geocells.
         cur_containing_geocell = cur_containing_geocell[0...-1]
         cur_geocells = cur_geocells.map { |cell| cell[0...-1] }   
-        break if !cur_geocells.empty? || !cur_geocells[0] # Done with search, we've searched everywhere.
+        break if cur_geocells.empty? || !cur_geocells[0] # Done with search, we've searched everywhere.
       elsif cur_geocells.size == 1
         # Get adjacent in one direction.
         # TODO(romannurik): Watch for +/- 90 degree latitude edge case geocells.
