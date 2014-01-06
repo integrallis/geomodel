@@ -84,7 +84,7 @@ module Geomodel
     while !cur_geocells.empty?
       closest_possible_next_result_dist = sorted_edge_distances[0]
       
-      next if max_distance && closest_possible_next_result_dist > max_distance
+      break if max_distance && closest_possible_next_result_dist > max_distance
   
       cur_geocells_unique = cur_geocells - searched_cells.to_a
   
