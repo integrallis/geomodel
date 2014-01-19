@@ -197,6 +197,10 @@ distances = results.map(&:last)
 
 ```
 
+## Demo
+
+A Rails 4 Demo application of using the GeoModel Library with Cassandra (http://cassandra.apache.org/) can be found at https://github.com/integrallis/geomodel-cassandra-demo and a live demo is deployed on Heroku at http://geomodel.herokuapp.com/
+
 ## Contributing
 
 1. Fork it
